@@ -5,7 +5,7 @@ local M = {}
 ---Prints a single-line summary of a benchmark result.
 ---@param test_name string Name of the test
 ---@param result Bench.Result The benchmark result to print
-local function print_result(test_name, result)
+function M.print_result(test_name, result)
     local function format_ms(ms)
         return string.format('%.3f ms', ms)
     end
@@ -20,6 +20,20 @@ local function print_result(test_name, result)
             format_ms(result.p95)
         )
     )
+end
+
+---@param a Bench.Result
+---@param b Bench.Result
+function M.print_diff(a, b)
+    ---@type Bench.Result
+    local diff = {
+        avg = b.avg - a.avg,
+        min = b.min - a.min,
+        max = b.max - a.max,
+        median = b.median - a.median,
+        p95 = b.p95 - a.p95,
+    }
+    M.print_result('diff', diff)
 end
 
 ---@class Bench.RunOpts Optional benchmarking configuration
@@ -80,7 +94,7 @@ function M.setup(opts)
         ---@return Bench.Result stats Statistics summary of the execution times
         run = function(fn)
             local result = run(fn, opts)
-            print_result(opts.name, result)
+            M.print_result(opts.name, result)
             return result
         end,
     }
