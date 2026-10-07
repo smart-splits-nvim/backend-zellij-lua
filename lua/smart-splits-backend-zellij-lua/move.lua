@@ -1,6 +1,6 @@
-local utils = require('smart-splits-backend-zellij.utils')
-local zellij = require('smart-splits-backend-zellij.zellij')
-local config = require('smart-splits-backend-zellij.config')
+local utils = require('smart-splits-backend-zellij-lua.utils')
+local zellij = require('smart-splits-backend-zellij-lua.zellij')
+local config = require('smart-splits-backend-zellij-lua.config')
 
 local M = {}
 

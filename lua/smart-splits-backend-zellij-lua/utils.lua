@@ -11,7 +11,7 @@ function M.reverse(direction)
     return opposite_directions[direction]
 end
 
-local bugreport_url = 'https://github.com/smart-splits-nvim/smart-splits-backend-zellij/issues'
+local bugreport_url = 'https://github.com/smart-splits-nvim/backend-zellij-lua/issues'
 function M.assert(condition, message)
     assert(
         condition,

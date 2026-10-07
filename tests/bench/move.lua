@@ -1,5 +1,5 @@
 local bench = require('tests.bench.init')
-local zellij = require('smart-splits-backend-zellij')
+local zellij = require('smart-splits-backend-zellij-lua.init')
 
 zellij.setup()
 

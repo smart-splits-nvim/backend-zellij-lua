@@ -1,4 +1,4 @@
-local zellij = require('smart-splits-backend-zellij.zellij')
+local zellij = require('smart-splits-backend-zellij-lua.zellij')
 
 ---@type SmartSplitsBackendResize
 local function resize(direction)
