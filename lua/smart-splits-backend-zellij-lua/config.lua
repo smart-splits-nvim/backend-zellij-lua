@@ -1,41 +1,41 @@
 local M = {}
 
----@class SmartSplits.Zellij.Config
----@field move_cursor SmartSplits.Zellij.Config.Move
----@field fullscreen SmartSplits.Zellij.Config.Fullscreen
----@field split SmartSplits.Zellij.Config.Split
+---@class SmartSplits.ZellijLua.Config
+---@field move_cursor SmartSplits.ZellijLua.Config.Move
+---@field fullscreen SmartSplits.ZellijLua.Config.Fullscreen
+---@field split SmartSplits.ZellijLua.Config.Split
 
----@class SmartSplits.Zellij.Config.Move
+---@class SmartSplits.ZellijLua.Config.Move
 ---@field pane_or_tab boolean
 
----@class SmartSplits.Zellij.Config.Split
+---@class SmartSplits.ZellijLua.Config.Split
 ---@field left boolean
 ---@field right boolean
 ---@field up boolean
 ---@field down boolean
 
----@class SmartSplits.Zellij.Config.Fullscreen
+---@class SmartSplits.ZellijLua.Config.Fullscreen
 ---@field block_nav boolean
 
 -- Same as above, but every field is nullable
----@class SmartSplits.Zellij.PartialConfig
----@field move_cursor? SmartSplits.Zellij.PartialConfig.Move
----@field fullscreen? SmartSplits.Zellij.PartialConfig.Fullscreen
----@field split? SmartSplits.Zellij.PartialConfig.Split
+---@class SmartSplits.ZellijLua.PartialConfig
+---@field move_cursor? SmartSplits.ZellijLua.PartialConfig.Move
+---@field fullscreen? SmartSplits.ZellijLua.PartialConfig.Fullscreen
+---@field split? SmartSplits.ZellijLua.PartialConfig.Split
 
----@class SmartSplits.Zellij.PartialConfig.Move
+---@class SmartSplits.ZellijLua.PartialConfig.Move
 ---@field pane_or_tab? boolean
 
----@class SmartSplits.Zellij.PartialConfig.Split
+---@class SmartSplits.ZellijLua.PartialConfig.Split
 ---@field left? boolean
 ---@field right? boolean
 ---@field up? boolean
 ---@field down? boolean
 
----@class SmartSplits.Zellij.PartialConfig.Fullscreen
+---@class SmartSplits.ZellijLua.PartialConfig.Fullscreen
 ---@field block_nav? boolean
 
----@type SmartSplits.Zellij.Config
+---@type SmartSplits.ZellijLua.Config
 M.defaults = {
     move_cursor = {
         pane_or_tab = false,
@@ -53,10 +53,10 @@ M.defaults = {
     },
 }
 
----@type SmartSplits.Zellij.Config
+---@type SmartSplits.ZellijLua.Config
 M.options = vim.deepcopy(M.defaults)
 
----@param opts? SmartSplits.Zellij.PartialConfig
+---@param opts? SmartSplits.ZellijLua.PartialConfig
 function M.setup(opts)
     opts = opts or {}
     M.options = vim.tbl_deep_extend('force', M.defaults, opts)

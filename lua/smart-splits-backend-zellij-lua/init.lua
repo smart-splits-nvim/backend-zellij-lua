@@ -1,5 +1,5 @@
 --- Set up configurations
----@param opts? SmartSplits.Zellij.PartialConfig
+---@param opts? SmartSplits.ZellijLua.PartialConfig
 local function setup(opts)
     local config = require('smart-splits-backend-zellij-lua.config')
     config.setup(opts)
