@@ -1,3 +1,9 @@
+# Project status
+
+This project is considered feature complete. New features will be rejected.
+
+Bug fixes are welcome as long as they don't rock the boat too much.
+
 # Benchmarking
 
 - Benchmarks are located in [tests/bench/](tests/bench/).
