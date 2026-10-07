@@ -334,42 +334,19 @@ local function try_move_or_tab(direction)
         return false
     end
 
-    -- Return false if there is only 1 tab
-    local panes = get_all_panes()
     local is_multiple_tabs = false
-    for _, pane in ipairs(panes) do
+    for _, pane in ipairs(get_all_panes()) do
         if pane.tab_position > 0 then
             is_multiple_tabs = true
             break
         end
     end
-    if not is_multiple_tabs then
+
+    if is_multiple_tabs then
+        return zellij.move_focus_or_tab(direction)
+    else
         return false
     end
-
-    local result = zellij.move_focus_or_tab(direction)
-
-    -- Exit fullscreen if the user wants us to.
-    -- Otherwise, we are done. (zellij preserves fullscreen by default)
-    if config.options.fullscreen.state_after_nav == 'exit' then
-        invalidate_cache()
-        panes = get_all_panes()
-        local nvim = get_nvim_pane()
-        for _, pane in ipairs(panes) do
-            if
-                pane.is_focused == true
-                and pane.is_fullscreen == true
-                and pane.tab_id == nvim.tab_id
-                and pane.id ~= nvim.id
-                and pane.is_plugin == false
-            then
-                set_fullscreen_state('none', { pane = pane })
-                break
-            end
-        end
-    end
-
-    return result
 end
 
 local last_move_time = 0
@@ -391,35 +368,12 @@ end
 ---@return boolean
 local function handle_normal_move(direction)
     local move_or_tab = config.options.move_cursor.pane_or_tab == true
-    local result = false
 
     if move_or_tab then
-        result = zellij.move_focus_or_tab(direction)
+        return zellij.move_focus_or_tab(direction)
     else
-        result = zellij.move_focus(direction)
+        return zellij.move_focus(direction)
     end
-
-    -- Exit fullscreen if the user wants us to.
-    -- Otherwise, we are done. (zellij preserves fullscreen by default)
-    if config.options.fullscreen.state_after_nav == 'exit' then
-        invalidate_cache()
-        local panes = get_all_panes()
-        local nvim = get_nvim_pane()
-        for _, pane in ipairs(panes) do
-            if
-                pane.is_focused == true
-                and pane.is_fullscreen == true
-                and pane.tab_id == nvim.tab_id
-                and pane.id ~= nvim.id
-                and pane.is_plugin == false
-            then
-                set_fullscreen_state('none', { pane = pane })
-                break
-            end
-        end
-    end
-
-    return result
 end
 
 --- Entrypoint for split moves
@@ -452,19 +406,13 @@ local function handle_split(direction)
 
     -- Split does not work when we are fullscreen - it messes up the layout coodrinates
     -- This is possibly a bug in zellij v0.45.0
-    local prev_fullscreen_state = 'none' ---@type FullscreenState
     local nvim = get_nvim_pane()
     if nvim.is_fullscreen == true then
-        prev_fullscreen_state = get_fullscreen_state(nvim)
         set_fullscreen_state('none', { pane = nvim })
         invalidate_cache()
     end
 
     local result = split_and_focus(direction)
-
-    if prev_fullscreen_state ~= 'none' and config.options.fullscreen.state_after_nav == 'keep' then
-        set_fullscreen_state(prev_fullscreen_state, { current_state = 'none' })
-    end
 
     return result
 end
@@ -482,19 +430,13 @@ local function handle_wrap(direction)
 
     -- Wrap does not work when we are fullscreen - it messes up the layout coodrinates
     -- This is possibly a bug in zellij v0.45.0
-    local prev_fullscreen_state = 'none' ---@type FullscreenState
     local nvim = get_nvim_pane()
     if nvim.is_fullscreen == true then
-        prev_fullscreen_state = get_fullscreen_state(nvim)
         set_fullscreen_state('none', { pane = nvim })
         invalidate_cache()
     end
 
     local result = move_or_wrap(direction)
-
-    if prev_fullscreen_state ~= 'none' and config.options.fullscreen.state_after_nav == 'keep' then
-        set_fullscreen_state(prev_fullscreen_state, { current_state = 'none' })
-    end
 
     return result
 end

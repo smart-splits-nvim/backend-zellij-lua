@@ -55,10 +55,6 @@ opts = {
   -- Behavior when zellij is in fullscreen
   fullscreen = {
     block_nav = false,          -- Block navigation if the current pane is fullscreen
-    state_after_nav = 'native'  -- **EXPERIMENTAL** Controls fullscreen state after navigation: 'exit', 'keep', or 'native'
-                                -- 'exit': Exit fullscreen
-                                -- 'keep': Stay in fullscreen
-                                -- 'native': automatically picks whichever of the two is fastest and causes the least screen flicker.
   },
 }
 ```

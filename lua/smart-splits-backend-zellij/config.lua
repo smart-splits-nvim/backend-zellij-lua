@@ -17,7 +17,6 @@ local M = {}
 
 ---@class SmartSplits.Zellij.Config.Fullscreen
 ---@field block_nav boolean
----@field state_after_nav 'exit'|'keep'|'native'
 
 -- Same as above, but every field is nullable
 ---@class SmartSplits.Zellij.PartialConfig
@@ -37,7 +36,6 @@ local M = {}
 
 ---@class SmartSplits.Zellij.PartialConfig.Fullscreen
 ---@field block_nav? boolean
----@field state_after_nav? 'exit'|'keep'|'native'
 
 ---@type SmartSplits.Zellij.Config
 M.defaults = {
@@ -55,7 +53,6 @@ M.defaults = {
 
     fullscreen = {
         block_nav = false,
-        state_after_nav = 'native',
     },
 }
 
