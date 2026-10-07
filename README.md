@@ -41,7 +41,6 @@ opts = {
   -- General behavior when moving cursor.
   move_cursor = {
     pane_or_tab = false,            -- Go to the next tab when navigating to an edge.
-    maximize_nav_speed = false      -- Convenience flag for fastest possible cursor movement. Forcefully overrides any user configuration that negatively impact cursor movement.
   },
 
   -- Behavior when at_edge is 'split'

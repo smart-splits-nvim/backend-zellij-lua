@@ -7,7 +7,6 @@ local M = {}
 
 ---@class SmartSplits.Zellij.Config.Move
 ---@field pane_or_tab boolean
----@field maximize_nav_speed boolean
 
 ---@class SmartSplits.Zellij.Config.Split
 ---@field left boolean
@@ -26,7 +25,6 @@ local M = {}
 
 ---@class SmartSplits.Zellij.PartialConfig.Move
 ---@field pane_or_tab? boolean
----@field maximize_nav_speed? boolean
 
 ---@class SmartSplits.Zellij.PartialConfig.Split
 ---@field left? boolean
@@ -41,7 +39,6 @@ local M = {}
 M.defaults = {
     move_cursor = {
         pane_or_tab = false,
-        maximize_nav_speed = false,
     },
 
     split = {

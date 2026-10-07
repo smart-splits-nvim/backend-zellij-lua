@@ -351,18 +351,6 @@ end
 
 local last_move_time = 0
 
---- Entrypoint for fast moves
----@param direction SmartSplitsDirection
----@return boolean
-local function handle_fast_move(direction)
-    local move_or_tab = config.options.move_cursor.pane_or_tab == true
-    if move_or_tab then
-        return zellij.move_focus_or_tab(direction)
-    else
-        return zellij.move_focus(direction)
-    end
-end
-
 --- Entrypoint for normal moves
 ---@param direction SmartSplitsDirection
 ---@return boolean
@@ -443,18 +431,11 @@ end
 
 ---@type SmartSplitsBackendMove
 local function handle_move(direction, opts)
-    local is_fast_move = opts.maximize_nav_speed == true
-        or (opts.maximize_nav_speed ~= false and config.options.move_cursor.maximize_nav_speed == true)
-
-    if config.options.fullscreen.block_nav == true and not is_fast_move then
-        if get_nvim_pane().is_fullscreen == true then
-            return false
-        end
+    if config.options.fullscreen.block_nav == true and get_nvim_pane().is_fullscreen == true then
+        return false
     end
 
-    if is_fast_move then
-        return handle_fast_move(direction)
-    elseif opts.at_edge == 'wrap' then
+    if opts.at_edge == 'wrap' then
         return handle_wrap(direction)
     elseif opts.at_edge == 'split' then
         return handle_split(direction)
