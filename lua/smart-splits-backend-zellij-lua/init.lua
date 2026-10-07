@@ -13,7 +13,7 @@ end
 
 ---@type SmartSplitsBackend
 local M = {
-    name = 'smart-splits-backend-zellij',
+    name = 'smart-splits-backend-zellij-lua',
     protocol_version = '3.0.0',
     detect = detect,
     move = require('smart-splits-backend-zellij-lua.move').try_move,
